@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TODO.ContextDB;
+using TODO.Interfaces;
+using TODO.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -28,7 +30,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey
         (Encoding.UTF8.GetBytes(builder.Configuration["JWT:key"]!))
     }
-); 
+);
+
+//scope para la interfaz de acceso al login
+builder.Services.AddScoped<IAccesible,AccesoSerivce>();
 
 
 var app = builder.Build();

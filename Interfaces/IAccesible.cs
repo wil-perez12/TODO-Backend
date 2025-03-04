@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TODO.Models;
 using TODO.Models.Dtos;
 
 namespace TODO.Interfaces
 {
-    public interface IAccesible
+    interface IAccesible
     {
-        Task Login(RegistroDTO modelo);
-        Task Registro(RegistroDTO modelo);
+        Task<Usuario> Login(LoginDTO modelo);
+        Task<Usuario> Registro(RegistroDTO modelo);
     }
 }
