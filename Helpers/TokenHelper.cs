@@ -6,7 +6,7 @@ using TODO.Models;
 
 namespace TODO.Helpers
 {
-    public class TokenHelper
+    class TokenHelper
     {
         private readonly IConfiguration _config;
         public TokenHelper(IConfiguration config)
@@ -15,15 +15,15 @@ namespace TODO.Helpers
         }
 
         // metodo que genera json web token del usuario. con el id y su correo.
-        public string TokenJwt(string userId, string email)
+        public string TokenJwt(Usuario modelo)
         {
             var keySegura = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]!));
             var credenciales = new SigningCredentials(keySegura,SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, userId),
-                new Claim(ClaimTypes.Email, email)
+                new Claim(ClaimTypes.NameIdentifier, modelo.Id.ToString()),
+                new Claim(ClaimTypes.Email, modelo.Correo!)
             };
 
 
