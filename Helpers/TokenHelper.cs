@@ -6,7 +6,7 @@ using TODO.Models;
 
 namespace TODO.Helpers
 {
-    class TokenHelper
+    public class TokenHelper
     {
         private readonly IConfiguration _config;
         public TokenHelper(IConfiguration config)

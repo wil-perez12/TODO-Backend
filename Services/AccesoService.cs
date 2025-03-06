@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TODO.Services
 {
-    class AccesoSerivce : IAccesible
+    public class AccesoService : IAccesible
     {
         private readonly TodoContext _context;
         private readonly EncriptarHelper _encriptarHelper;
 
-        public AccesoSerivce(TodoContext context, EncriptarHelper encriptarHelper)
+        public AccesoService(TodoContext context, EncriptarHelper encriptarHelper)
         {
             this._context = context;
             this._encriptarHelper = encriptarHelper;

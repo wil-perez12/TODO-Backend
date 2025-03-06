@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TODO.Helpers;
 using TODO.Interfaces;
 using TODO.Models.Dtos;
-using TODO.Models;
+
 
 
 namespace TODO.Controllers
 {
     [Route("api/[controller]")]
+    [AllowAnonymous]
     [ApiController]
-    class AccesoController : ControllerBase
+ 
+    public class AccesoController : ControllerBase
     {
         private readonly IAccesible _Iacceso;
         private readonly TokenHelper _helpers;
@@ -23,20 +26,21 @@ namespace TODO.Controllers
 
         //endpoint que retorna un jwt si el usuario esta autenticado
         [HttpGet("Login")]
-        public async Task<IActionResult> Login(LoginDTO modelo)
+        public async Task<IActionResult> Login([FromQuery] LoginDTO modelo)
         {
             var usuarioAutenticado = await _Iacceso.Login(modelo);
 
             if (usuarioAutenticado == null)
                 return Unauthorized(new {mensaje = "Credenciales Incorrectas"});
             else
+
                 return Ok(_helpers.TokenJwt(usuarioAutenticado));
         }
 
 
         //endpoint para registrar el usuario en la app
         [HttpPost("Registro")]
-        public async Task<IActionResult> Registro(RegistroDTO modelo)
+        public async Task<IActionResult> Registro([FromBody] RegistroDTO modelo)
         {
 
             var registro = await _Iacceso.Registro(modelo);

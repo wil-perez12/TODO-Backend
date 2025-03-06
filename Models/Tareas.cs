@@ -1,6 +1,6 @@
 ﻿namespace TODO.Models
 {
-  class Tareas
+    public class Tareas
     {
         public int Id { get; set; }
         public string? Titulo { get; set; }

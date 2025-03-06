@@ -3,7 +3,7 @@ using TODO.Models;
 
 namespace TODO.ContextDB;
 
-class TodoContext : DbContext
+public class TodoContext : DbContext
 {
     public TodoContext(DbContextOptions<TodoContext> option): base(option) { }
 

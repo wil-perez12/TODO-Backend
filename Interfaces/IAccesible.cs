@@ -4,7 +4,7 @@ using TODO.Models.Dtos;
 
 namespace TODO.Interfaces
 {
-    interface IAccesible
+    public interface IAccesible
     {
         Task<Usuario> Login(LoginDTO modelo);
         Task<Usuario> Registro(RegistroDTO modelo);
