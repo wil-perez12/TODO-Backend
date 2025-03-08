@@ -8,5 +8,7 @@ namespace TODO.Interfaces
     {
         Task<Usuario> Login(LoginDTO modelo);
         Task<Usuario> Registro(RegistroDTO modelo);
+
+        List<Usuario> GetUsuario();
     }
 }

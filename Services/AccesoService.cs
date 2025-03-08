@@ -19,6 +19,13 @@ namespace TODO.Services
             this._encriptarHelper = encriptarHelper;
         }
 
+        //retorna la lista de users en la base de datos
+        public List<Usuario> GetUsuario()
+        {
+            return _context.Usuario.ToList();
+        }
+
+        //retorna el modelo por el correo y contraseña que se encuenta encriptada
         public async Task<Usuario> Login(LoginDTO modelo)
         {
             var BuscarUsuario = await _context.Usuario
@@ -28,7 +35,7 @@ namespace TODO.Services
             return BuscarUsuario;
         }
 
-
+        //retorna un usuarioque no se encuentra en la tabla usuarios de la db
         public async Task<Usuario?> Registro(RegistroDTO modelo)
         {
             // Verifica si el usuario ya existe en la DB

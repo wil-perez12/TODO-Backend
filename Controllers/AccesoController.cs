@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TODO.Helpers;
 using TODO.Interfaces;
+using TODO.Models;
 using TODO.Models.Dtos;
 
 
@@ -23,10 +24,16 @@ namespace TODO.Controllers
             _helpers = helpers;
         }
 
+        //endpoint para obtener la lista de usuarios
+        [HttpGet("Usuarios")]
+        public List<Usuario> GetUsuarios()
+        {
+            return _Iacceso.GetUsuario();
+        }
 
         //endpoint que retorna un jwt si el usuario esta autenticado
-        [HttpGet("Login")]
-        public async Task<IActionResult> Login([FromQuery] LoginDTO modelo)
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginDTO modelo)
         {
             var usuarioAutenticado = await _Iacceso.Login(modelo);
 
