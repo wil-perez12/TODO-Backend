@@ -11,6 +11,6 @@ namespace TODO.Interfaces
         Task<Tareas> GetTareaByEstado(string estado);
         Task<Tareas> PostTarea(TareaDTO modelo);
         Task<Tareas> PutTarea(int id,TareaDTO modelo);
-        Task DeleteTarea(int id);
+        Task<bool> DeleteTarea(int id);
     }
 }

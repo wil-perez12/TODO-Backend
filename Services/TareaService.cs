@@ -16,13 +16,19 @@ namespace TODO.Services
             _context = context;
         }
 
-        public async Task DeleteTarea(int id)
+        public async Task<bool> DeleteTarea(int id)
         {
-            var IdTarea = await _context.Tareas
-                              .FindAsync(id);
+            var tarea = await _context.Tareas.FirstOrDefaultAsync(t => t.Id == id);
 
-            _context.Tareas.Remove(IdTarea!);
+            if (tarea == null)
+            {
+                return false; 
+            }
+
+            _context.Tareas.Remove(tarea);
             await _context.SaveChangesAsync();
+
+            return true; 
         }
 
         public async Task<List<Tareas>> GetTarea()
@@ -48,18 +54,19 @@ namespace TODO.Services
 
         public async Task<Tareas> PostTarea(TareaDTO modelo)
         {
-            var Tareas = new Tareas
-            {
-                Titulo = modelo.Titulo,
-                Estado = modelo.Estado,
-                Descripcion = modelo.Descripcion
-            };
-
             try
             {
-                await _context.AddAsync(Tareas);
+                var Tarea = new Tareas
+                {
+                    Titulo = modelo.Titulo,
+                    Descripcion = modelo.Descripcion,
+                    Estado = modelo.Estado,
+                    IdUsuario = modelo.IdUsuario
+                };
+
+                await _context.AddAsync(Tarea);
                 await _context.SaveChangesAsync();
-                return Tareas;
+                return Tarea;
             }
             catch (Exception ex)
             {

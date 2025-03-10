@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TODO.Interfaces;
+using TODO.Models;
+using TODO.Models.Dtos;
 using TODO.Services;
 
 namespace TODO.Controllers
@@ -47,6 +49,42 @@ namespace TODO.Controllers
 
             else
                 return BadRequest("Tarea no encontrada con este estado");
+        }
+
+        [HttpPost("New/tarea")]
+        public async Task<IActionResult> PostTarea(TareaDTO modelo)
+        { 
+            var newTarea = await _servicio.PostTarea(modelo);
+
+            if (newTarea == null)
+                return StatusCode(500, "Error al crear la tarea!");
+
+            return Ok(newTarea); 
+
+        }
+
+        [HttpPut("update/tarea")]
+        public async Task<IActionResult> PutTarea(int id, TareaDTO modelo)
+        {
+            var updateTarea = await _servicio.PutTarea(id, modelo);
+
+            if (updateTarea == null)
+                return BadRequest("Id incorrecto o error al actualizar la tarea");
+
+            else
+                return Ok(updateTarea);
+        }
+
+        [HttpDelete("delete")]
+        public async Task<IActionResult> DeleteTarea(int id)
+        {
+            var extisteID = await _servicio.DeleteTarea(id);
+
+            if (!extisteID)
+                return BadRequest("Id no encontrado");
+            else
+                return Ok(new { mensaje = $"Tarea con ID: {id}, eliminada!"});
+
         }
     }
 }
