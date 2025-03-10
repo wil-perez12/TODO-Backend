@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TODO.Models;
 
+
 namespace TODO.ContextDB;
 
 public class TodoContext : DbContext
@@ -9,4 +10,14 @@ public class TodoContext : DbContext
 
     public DbSet<Usuario> Usuario { get; set; }
     public DbSet<Tareas> Tareas { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Usuario>()
+                    .HasMany(u => u.Tareas)
+                    .WithOne(t => t.Usuario)
+                    .HasForeignKey(t => t.IdUsuario);
+
+        base.OnModelCreating(modelBuilder);
+    }
 }

@@ -1,4 +1,6 @@
-﻿namespace TODO.Models
+﻿using System.Text.Json.Serialization;
+
+namespace TODO.Models
 {
     public class Tareas
     {
@@ -9,6 +11,8 @@
 
         //relacion con la tabla usuario
         public int IdUsuario { get; set; }
+
+        [JsonIgnore] // ignora esta propiedad al serializar
         public Usuario? Usuario { get; set; }
     }
 }

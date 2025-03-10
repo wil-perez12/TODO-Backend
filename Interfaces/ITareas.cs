@@ -1,0 +1,16 @@
+﻿using TODO.Models;
+using TODO.Models.Dtos;
+
+namespace TODO.Interfaces
+{
+    public interface ITareas
+    {
+
+        Task<List<Tareas>> GetTarea();
+        Task<Tareas> GetTareaById(int id);
+        Task<Tareas> GetTareaByEstado(string estado);
+        Task<Tareas> PostTarea(TareaDTO modelo);
+        Task<Tareas> PutTarea(int id,TareaDTO modelo);
+        Task DeleteTarea(int id);
+    }
+}

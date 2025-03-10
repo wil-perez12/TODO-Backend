@@ -20,9 +20,9 @@ namespace TODO.Services
         }
 
         //retorna la lista de users en la base de datos
-        public List<Usuario> GetUsuario()
+        public async Task<List<Usuario>> GetUsuario()
         {
-            return _context.Usuario.ToList();
+            return await _context.Usuario.ToListAsync();
         }
 
         //retorna el modelo por el correo y contraseña que se encuenta encriptada

@@ -26,9 +26,10 @@ namespace TODO.Controllers
 
         //endpoint para obtener la lista de usuarios
         [HttpGet("Usuarios")]
-        public List<Usuario> GetUsuarios()
+        public async Task<IActionResult> GetUsuarios()
         {
-            return _Iacceso.GetUsuario();
+            var lista = await _Iacceso.GetUsuario();
+            return Ok(lista);
         }
 
         //endpoint que retorna un jwt si el usuario esta autenticado

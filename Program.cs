@@ -24,6 +24,9 @@ class Program
         builder.Services.AddScoped<EncriptarHelper>();
         builder.Services.AddScoped<TokenHelper>();
 
+        //socpe para la interfaz de tareas
+        builder.Services.AddScoped<ITareas,TareaService>();
+
         //conexion a la base de datos 
         builder.Services.AddSqlServer<TodoContext>(builder.Configuration.GetConnectionString("Conection"));
 

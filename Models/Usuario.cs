@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Text.Json.Serialization;
+using System.Threading;
 
 namespace TODO.Models
 {
@@ -10,12 +11,9 @@ namespace TODO.Models
         public string? Correo { get; set; }
         public string? Contrasena { get; set; }
 
-        //Lista de tareas para evitar referencias nulas
+        //Lista de tareas
+        [JsonIgnore]
         public ICollection<Tareas> Tareas { get; set; }
 
-        public Usuario()
-        {
-            Tareas = new List<Tareas>();
-        }
     }
 }
